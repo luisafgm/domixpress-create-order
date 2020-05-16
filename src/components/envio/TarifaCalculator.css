@@ -1,0 +1,42 @@
+.envio-place {
+    margin-right: 20px;
+    text-align: center;
+    height: 50px;
+    width: 260px;
+    color: #670E82;
+    background-color: rgb(252, 246, 246);
+    font-size: 1.1rem;
+}
+
+
+.valor-aproximado{
+    color: #fdfdfe;
+    background-color: #670E82;
+    border-color: #fdfdfe;
+    position: relative;
+    padding: -1.75rem 1.25rem;
+    margin: 3px 0;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+/* button {
+    margin-right: 20px;
+    text-align: center;
+    height: 40px;
+    width: 270px;
+    color: #670E82;
+    border: 1px solid #670E82;
+    background-color: rgb(252, 246, 246);
+    font-size: 1.1rem;
+    border: 1px solid #670E82;
+    margin: 15px 0;
+    border-bottom: 1px solid #ccc;
+} */
+
+select {
+    width: 33%;
+    border: 1px solid #670E82;
+    padding: 5px 4px;
+    margin: 3px 0;
+    box-sizing: border-box;
+  }
