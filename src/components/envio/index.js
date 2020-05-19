@@ -19,49 +19,128 @@ firebase.initializeApp(firebaseConfig)
 
 const dbRef = firebase.firestore()
 
-const save = () => {
-  // dbRef.collection('domicilios').add({
-  //   userId: '1234',
-  //   name: 'Leon Rueda',
-  //   address: 'frejavagen'
-  // })
-  window.open("https://api.whatsapp.com/send?phone=573234842907&message='hola'", '_blank');
-}
+class CustomerDetails extends React.Component{
+   
+  constructor(props){
+      super(props)
+      this.state = {
+        nameOri: '',
+        telOri: '',
+        addressOri: '',
+        nameDes: '',
+        telDes: '',
+        addressDes: '',
+      }
+    }
 
-const CustomerDetails = () => {
+  handleChange = (e) => {
+    const { name, value } = e.target
+    this.setState({ [name]: value })
+  }
+  
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const values = JSON.stringify(this.state)
+  }
+
+  save = () => {
+    dbRef.collection('domicilios').add({
+      orderData: this.state,
+    })
+
+    window.open("https://api.whatsapp.com/send?phone=573234842907&message='hola'", '_blank');
+  }
+
+  render(){
+  
+  const { nameOri, telOri, addressOri, nameDes, telDes, addressDes, pagoOri, pagoDes } = this.state
+
   return (
     <section> 
-
-<div class="container">
-  <div class="card-deck mb-2 text-center">
-    <div class="card mb-4 shadow-sm">
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal" >Origen</h4>
+<form onSubmit={this.handleSubmit}>
+<div className="container">
+  <div className="card-deck mb-3 text-center">
+    <div className="card mb-4 shadow-sm">
+      <div className="card-header">
+        <h4 className="my-0 font-weight-normal" >Origen</h4>
       </div>
-      <div class="card-body">
-      <input class="form-control" type="text" name="name" placeholder="Nombre de quien envía"/> 
-        <input class="form-control" type="tel" min="10" max="10" placeholder="Teléfono"/>
-        <input class="form-control" type="text"  placeholder="Dirección"/>
+      <div className="card-body">
+      <input id="name-ori" className="form-control"
+            name="nameOri"
+            type="name"
+            value={nameOri} 
+            onChange={this.handleChange}
+            placeholder="Nombre de quien envía"/> 
+      <input id="tel-ori" className="form-control"
+            name="telOri"
+            type="tel"
+            value={telOri}
+            onChange={this.handleChange}
+            placeholder="Teléfono"/>
+      <input id="addr-ori" className="form-control"
+            name="addressOri"
+            type="address"
+            value={addressOri}
+            onChange={this.handleChange}
+            placeholder="Dirección"/>
       </div>
     </div>
 
-<div class="card mb-4 shadow-sm">
-      <div class="card-header" >
-        <h4 class="my-0 font-weight-normal">Destino</h4>
+  <div className="card mb-4 shadow-sm">
+      <div className="card-header" >
+        <h4 className="my-0 font-weight-normal">Destino</h4>
       </div>
-      <div class="card-body">
-      <input class="form-control" type="text" name="name" placeholder="Nombre de quien recibe"/> 
-        <input class="form-control" type="tel" placeholder="Teléfono"/>
-        <input class="form-control" type="text" placeholder="Dirección"/>
+      <div className="card-body">
+      <input id="name-des" className="form-control"
+            name="nameDes"
+            type="name"
+            value={nameDes} 
+            onChange={this.handleChange}
+            placeholder="Nombre de quien envía"/> 
+      <input id="tel-des" className="form-control"
+            name="telDes"
+            type="tel"
+            value={telDes} 
+            onChange={this.handleChange}
+            placeholder="Teléfono"/>
+      <input id="addr-des" className="form-control"
+            name="addressDes"
+            type="address"
+            value={addressDes} 
+            onChange={this.handleChange}
+            placeholder="Dirección"/>
       </div>
-      </div>
-    </div>
-    </div>
+  </div>
+  </div>
 
-      <button onClick={save} className="solicitar-servicio" type="button" id="" class="btn btn-outline-light" >Solicitar servicio</button>
+
+
+  <div className="card mb-4 shadow-sm">
+      <div className="card-header" >
+        <h4 className="my-0 font-weight-normal">Metodo de pago</h4>
+      </div>
+      <div className="custom-control custom-radio">
+          <input id="pagoorigen" name="paymentMethod" 
+          className="custom-control-input"
+          type="radio"  onChange={this.handleChange}
+          value={pagoOri} />
+          <label className="custom-control-label" 
+          htmlFor="pagoorigen">Origen</label>
+      </div>
+      <div className="custom-control custom-radio">
+          <input id="pagodestino" name="paymentMethod" 
+          className="custom-control-input"
+          type="radio"  onChange={this.handleChange}
+          value={pagoDes} />           
+          <label className="custom-control-label" htmlFor="pagodestino">Destino</label>
+        </div>
+    </div>
+</div>
+      <button onClick={this.save} className="solicitar-servicio" type="submit" id="" className="btn btn-outline-light" >Solicitar servicio</button>
+      </form>    
   </section>
   
   )
-  
+  }
 }
 export default CustomerDetails

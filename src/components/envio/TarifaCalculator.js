@@ -107,9 +107,9 @@ const TarifaCalculator = ({ nextStep }) => {
         onSelect={mostrarTarifa('destino')} // placeTo -> este
         />
 
-      {tarifa && <div class="card-body">
-        <h1 class="valor-aproximado"><strong>${tarifa}</strong> </h1>
-        <h6 class="valor-aproximado">Valor apróximado del servicio</h6>
+      {tarifa && <div className="card-body">
+        <h1 className="valor-aproximado"><strong>${tarifa}</strong> </h1>
+        <h6 className="valor-aproximado">Valor apróximado del servicio</h6>
         </div>}
 
       {tarifa && <div><button onClick={nextStep} variant="contained" type="button" class="btn btn-outline-light" >¡Siguiente!</button></div>}
